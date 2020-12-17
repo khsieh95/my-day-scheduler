@@ -1,10 +1,10 @@
 // Global Variables
 var currentDay = $("#currentDay");
-var today = moment().format("MMM Do YY");
 var saveButtonsClicked = $(".saveBtn");
 var textAreas = $("textarea");
 var userInput = JSON.parse(localStorage.getItem("userInput") || "[]");
-var currentHour = moment().hours();
+var today = moment().format("MMM Do YY");
+var currentHour = moment().format("k");
 
 $("#currentDay").text(today);
 
@@ -18,13 +18,12 @@ saveButtonsClicked.on("click", function () {
 });
 
 // function to compare local time to time on calendar
-
 $.each(textAreas, function () {
   var dataTime = this.getAttribute("data-time");
   if (parseInt(dataTime) < currentHour) {
     $(this).addClass("past");
     $(this).removeClass("present future");
-  } else if (parseInt(dataTime) === currentHour) {
+  } else if (parseInt(dataTime) == currentHour) {
     $(this).removeClass("past future");
     $(this).addClass("present");
   } else {
@@ -32,3 +31,5 @@ $.each(textAreas, function () {
     $(this).addClass("future");
   }
 });
+console.log(textAreas);
+console.log(currentHour);

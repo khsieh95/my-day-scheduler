@@ -9,22 +9,23 @@ var currentHour = moment().format("k");
 $("#currentDay").text(today);
 
 // For loop to match userInput with buttons and values
-// for (i = 0; i < 9; i++) {
-//   var objectValues = userInput["saveBtn" + i];
-//   var textAreaClass = textAreas[i];
+for (i = 0; i < 9; i++) {
+  var objectValues = userInput["saveBtn" + i];
+  var textAreaClass = textAreas[i];
 
-//   textAreaClass.text = objectValues;
-//   console.log(textAreaClass);
-// }
+  textAreaClass.text = objectValues;
+  console.log(textAreaClass);
+}
 
 // function for save button and to locally store
 saveButtonsClicked.on("click", function () {
   var userText = $(this.previousElementSibling).val();
   var saveButtonId = this.id;
   userInput[saveButtonId] = userText;
+  localStorage.setItem(saveButtonId, userText);
+
   console.log(userText);
   console.log(saveButtonId);
-  localStorage.setItem(saveButtonId, userText);
 });
 
 // function to compare local time to time on calendar

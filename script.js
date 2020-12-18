@@ -8,22 +8,32 @@ var currentHour = moment().format("k");
 
 $("#currentDay").text(today);
 
+// For loop to match userInput with buttons and values
+// for (i = 0; i < 9; i++) {
+//   var objectValues = userInput["saveBtn" + i];
+//   var textAreaClass = textAreas[i];
+
+//   textAreaClass.text = objectValues;
+//   console.log(textAreaClass);
+// }
+
 // function for save button and to locally store
 saveButtonsClicked.on("click", function () {
-  console.log("clicked");
   var userText = $(this.previousElementSibling).val();
-  var parentTime = $(this).parent().attr("id");
-  localStorage.setItem(parentTime, userText);
-  console.log(localStorage);
+  var saveButtonId = this.id;
+  userInput[saveButtonId] = userText;
+  console.log(userText);
+  console.log(saveButtonId);
+  localStorage.setItem(saveButtonId, userText);
 });
 
 // function to compare local time to time on calendar
 $.each(textAreas, function () {
   var dataTime = this.getAttribute("data-time");
-  if (parseInt(dataTime) < currentHour) {
+  if (dataTime < currentHour) {
     $(this).addClass("past");
     $(this).removeClass("present future");
-  } else if (parseInt(dataTime) == currentHour) {
+  } else if (dataTime == currentHour) {
     $(this).removeClass("past future");
     $(this).addClass("present");
   } else {
@@ -31,5 +41,4 @@ $.each(textAreas, function () {
     $(this).addClass("future");
   }
 });
-console.log(textAreas);
 console.log(currentHour);
